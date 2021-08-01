@@ -1,10 +1,132 @@
 package com.skilldistillery.foodtruck.app;
 
+import java.util.Scanner;
+
 public class FoodTruckApp {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	Scanner kb = new Scanner(System.in);
 
+	public static void main(String[] args) {
+		FoodTruck[] foodTrucks = new FoodTruck[5];
+		FoodTruckApp foodTruckApp = new FoodTruckApp();
+
+		foodTruckApp.getFoodTruckInfo(foodTrucks);
+
+		foodTruckApp.displayTrucks(foodTrucks);
+		foodTruckApp.displayMenus(foodTrucks);
+
+	}
+
+	public void displayMenus(FoodTruck[] trucks) {
+		int selection = 0;
+
+		while (selection != 4) {
+			System.out.println("********** PLEASE SELECT A NUMBER **********");
+			System.out.println("1) List all existing food trucks");
+			System.out.println("2) See an average of food trucks ratings");
+			System.out.println("3) Display the highest rated food truck");
+			System.out.println("4) Quit");
+			selection = kb.nextInt();
+			kb.nextLine();
+			switch (selection) {
+			case 1:
+				truckNames(trucks);
+
+				break;
+			case 2:
+				averageRating(trucks);
+				break;
+			case 3:
+				highestRated(trucks);
+				break;
+			case 4:
+				System.out.println("You have chosen to quit, GOODBYE!");
+				break;
+			default:
+				System.err.println("Invalid Selection, Please try again.");
+				break;
+				
+			}
+
+		}
+
+	}
+	
+
+	public void highestRated(FoodTruck[] trucks ) {
+		int min = trucks[0].getNumRating();
+		int max = trucks[0].getNumRating();
+
+		for (int i = 0; i < trucks.length; i++) {
+
+
+		if (min >trucks[i].getNumRating()) {
+			min = trucks[i].getNumRating();
+		}
+		if (max < trucks[i].getNumRating()) {
+			max = trucks[i].getNumRating();
+		}
+		if (trucks[i].equals(null)) {
+			continue;
+		}
+		System.out.println("The max rating is: " + max);
+		}
+	}
+
+	public void averageRating(FoodTruck[] trucks) {
+		FoodTruckApp foodTruckApp = new FoodTruckApp();
+		for ( int i = 0; i < trucks.length;i++) {
+			
+			System.out.println(trucks[i].getNumRating());
+			if (trucks[i] == null) {
+				continue;
+				
+			}
+			System.out.println(trucks[i].getNumRating());
+			
+		}
+		
+		
+		}
+
+	
+
+	public void truckNames(FoodTruck[] trucks) {
+		for (int i = 0; i < trucks.length; i++) {
+			if (trucks[i] == (null)) {
+				continue;
+
+			}
+			System.out.println(trucks[i].getName());
+
+		}
+	}
+
+	public void getFoodTruckInfo(FoodTruck[] trucks) {
+		for (int i = 0; i < trucks.length; i++) {
+			System.out.println("Please enter the name of the food truck: ");
+			String name = kb.nextLine();
+			if (name.equals("quit")) {
+				break;
+			}
+			System.out.println("Please enter the type of food the truck serves: ");
+			String foodType = kb.nextLine();
+			System.out.println("Please enter your rating: ");
+			int numRating = kb.nextInt();
+			kb.nextLine();
+			FoodTruck foodTruck = new FoodTruck(name, foodType, numRating);
+			trucks[i] = foodTruck;
+
+		}
+
+	}
+
+	public void displayTrucks(FoodTruck[] trucks) {
+		for (int i = 0; i < trucks.length; i++) {
+
+			System.out.println(trucks[i]);
+
+		}
 	}
 
 }
