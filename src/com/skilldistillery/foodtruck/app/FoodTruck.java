@@ -18,7 +18,6 @@ public class FoodTruck {
 
 	}
 
-
 	public int getTruckId() {
 		return truckId;
 	}
@@ -61,8 +60,8 @@ public class FoodTruck {
 
 	@Override
 	public String toString() {
-		return "FoodTruck [name=" + name + ", foodType=" + foodType + ", numRating=" + numRating + ", truckId="
-				+ truckId + "]";
+		return "FoodTruck [ name = " + name + ", foodType = " + foodType + ", numRating = " + numRating + ", truckId = "
+				+ truckId + " ]";
 	}
 
 }

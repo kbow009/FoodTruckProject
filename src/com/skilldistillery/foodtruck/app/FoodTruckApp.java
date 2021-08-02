@@ -10,7 +10,7 @@ public class FoodTruckApp {
 		FoodTruck[] foodTrucks = new FoodTruck[5];
 		FoodTruckApp foodTruckApp = new FoodTruckApp();
 
-		foodTruckApp.getFoodTruckInfo(foodTrucks);
+		foodTruckApp.inputFoodTruckInfo(foodTrucks);
 
 		foodTruckApp.displayTrucks(foodTrucks);
 		foodTruckApp.displayMenus(foodTrucks);
@@ -54,38 +54,41 @@ public class FoodTruckApp {
 	
 
 	public void highestRated(FoodTruck[] trucks ) {
-		int min = trucks[0].getNumRating();
-		int max = trucks[0].getNumRating();
+		FoodTruck lowest = trucks[0];
+		FoodTruck highest = trucks[0];
 
 		for (int i = 0; i < trucks.length; i++) {
+			FoodTruck ft = trucks[i];
+			
+			if(ft != null) {
+				if(lowest.getNumRating() > trucks[i].getNumRating()) {
+					lowest = trucks[i];
+					
+				}
+				if(highest.getNumRating() < trucks[i].getNumRating()) {
+					highest = trucks[i];
+					
+				}
+			}
 
-
-		if (min >trucks[i].getNumRating()) {
-			min = trucks[i].getNumRating();
 		}
-		if (max < trucks[i].getNumRating()) {
-			max = trucks[i].getNumRating();
-		}
-		if (trucks[i].equals(null)) {
-			continue;
-		}
-		System.out.println("The max rating is: " + max);
-		}
+		System.out.println("The highest rated truck is: " + highest);
 	}
 
 	public void averageRating(FoodTruck[] trucks) {
-		FoodTruckApp foodTruckApp = new FoodTruckApp();
+		int ratingsTot = 0;
+		int count = 0;
 		for ( int i = 0; i < trucks.length;i++) {
-			
-			System.out.println(trucks[i].getNumRating());
-			if (trucks[i] == null) {
-				continue;
+			FoodTruck fT = trucks[i];
+			if (fT != null) {
+				ratingsTot += fT.getNumRating();
+				count++;
 				
 			}
-			System.out.println(trucks[i].getNumRating());
 			
 		}
-		
+		double avg = (double) ratingsTot / count;
+		System.out.println("The total trucks average is: "+ Math.round((avg)*10.0)/10.0);
 		
 		}
 
@@ -102,7 +105,7 @@ public class FoodTruckApp {
 		}
 	}
 
-	public void getFoodTruckInfo(FoodTruck[] trucks) {
+	public void inputFoodTruckInfo(FoodTruck[] trucks) {
 		for (int i = 0; i < trucks.length; i++) {
 			System.out.println("Please enter the name of the food truck: ");
 			String name = kb.nextLine();
@@ -125,6 +128,7 @@ public class FoodTruckApp {
 		for (int i = 0; i < trucks.length; i++) {
 
 			System.out.println(trucks[i]);
+			
 
 		}
 	}
