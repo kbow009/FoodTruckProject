@@ -17,6 +17,33 @@ public class FoodTruckApp {
 
 	}
 
+	public void inputFoodTruckInfo(FoodTruck[] trucks) {
+		for (int i = 0; i < trucks.length; i++) {
+			System.out.println("Please enter the name of the food truck: ");
+			String name = kb.nextLine();
+			if (name.equals("quit")) {
+				break;
+			}
+			System.out.println("Please enter the type of food the truck serves: ");
+			String foodType = kb.nextLine();
+			System.out.println("Please enter your rating: ");
+			int numRating = kb.nextInt();
+			kb.nextLine();
+			FoodTruck foodTruck = new FoodTruck(name, foodType, numRating);
+			trucks[i] = foodTruck;
+
+		}
+
+	}
+
+	public void displayTrucks(FoodTruck[] trucks) {
+		for (int i = 0; i < trucks.length; i++) {
+
+			System.out.println(trucks[i]);
+
+		}
+	}
+
 	public void displayMenus(FoodTruck[] trucks) {
 		int selection = 0;
 
@@ -45,92 +72,53 @@ public class FoodTruckApp {
 			default:
 				System.err.println("Invalid Selection, Please try again.");
 				break;
-				
+
 			}
 
 		}
 
 	}
-	
-
-	public void highestRated(FoodTruck[] trucks ) {
-		FoodTruck lowest = trucks[0];
-		FoodTruck highest = trucks[0];
-
-		for (int i = 0; i < trucks.length; i++) {
-			FoodTruck ft = trucks[i];
-			
-			if(ft != null) {
-				if(lowest.getNumRating() > trucks[i].getNumRating()) {
-					lowest = trucks[i];
-					
-				}
-				if(highest.getNumRating() < trucks[i].getNumRating()) {
-					highest = trucks[i];
-					
-				}
-			}
-
-		}
-		System.out.println("The highest rated truck is: " + highest);
-	}
-
-	public void averageRating(FoodTruck[] trucks) {
-		int ratingsTot = 0;
-		int count = 0;
-		for ( int i = 0; i < trucks.length;i++) {
-			FoodTruck fT = trucks[i];
-			if (fT != null) {
-				ratingsTot += fT.getNumRating();
-				count++;
-				
-			}
-			
-		}
-		double avg = (double) ratingsTot / count;
-		System.out.println("The total trucks average is: "+ Math.round((avg)*10.0)/10.0);
-		
-		}
-
-	
 
 	public void truckNames(FoodTruck[] trucks) {
 		for (int i = 0; i < trucks.length; i++) {
 			if (trucks[i] == (null)) {
 				continue;
-
 			}
 			System.out.println(trucks[i].getName());
-
 		}
 	}
 
-	public void inputFoodTruckInfo(FoodTruck[] trucks) {
+	public void averageRating(FoodTruck[] trucks) {
+		int ratingsTot = 0;
+		int count = 0;
 		for (int i = 0; i < trucks.length; i++) {
-			System.out.println("Please enter the name of the food truck: ");
-			String name = kb.nextLine();
-			if (name.equals("quit")) {
-				break;
+			FoodTruck fT = trucks[i];
+			if (fT != null) {
+				ratingsTot += fT.getNumRating();
+				count++;
 			}
-			System.out.println("Please enter the type of food the truck serves: ");
-			String foodType = kb.nextLine();
-			System.out.println("Please enter your rating: ");
-			int numRating = kb.nextInt();
-			kb.nextLine();
-			FoodTruck foodTruck = new FoodTruck(name, foodType, numRating);
-			trucks[i] = foodTruck;
-
 		}
-
+		double avg = (double) ratingsTot / count;
+		System.out.println("The total trucks average is: " + Math.round((avg) * 10.0) / 10.0);
 	}
 
-	public void displayTrucks(FoodTruck[] trucks) {
-		for (int i = 0; i < trucks.length; i++) {
+	public void highestRated(FoodTruck[] trucks) {
+		FoodTruck lowest = trucks[0];
+		FoodTruck highest = trucks[0];
 
-			System.out.println(trucks[i]);
-			
+		for (int i = 0; i < trucks.length; i++) {
+			FoodTruck ft = trucks[i];
+			if (ft != null) {
+				if (lowest.getNumRating() > trucks[i].getNumRating()) {
+					lowest = trucks[i];
+				}
+				if (highest.getNumRating() < trucks[i].getNumRating()) {
+					highest = trucks[i];
+				}
+			}
 
 		}
+		System.out.println("The highest rated truck is: " + highest);
 	}
 
 }
